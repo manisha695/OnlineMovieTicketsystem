@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.omts.Exception.ShowException;
+import com.capgemini.omts.Exception.InputInvalidException;
 import com.capgemini.omts.dao.ShowRepository;
 import com.capgemini.omts.entity.ShowBean;
 
@@ -26,6 +26,8 @@ public class ShowServiceImpl implements IShowService {
 		if (repo.existsById(showId)) {
 
 			repo.deleteById(showId);
+		}else {
+			throw new InputInvalidException("id not found");
 		}
 
 		return true;
@@ -43,7 +45,7 @@ public class ShowServiceImpl implements IShowService {
 		if (repo.findById(showId).isPresent()) {
 			System.out.println("showId");
 		} else {
-			throw new ShowException("id not found");
+			throw new InputInvalidException("id not found");
 		}
 		return repo.findById(showId).get();
 	}

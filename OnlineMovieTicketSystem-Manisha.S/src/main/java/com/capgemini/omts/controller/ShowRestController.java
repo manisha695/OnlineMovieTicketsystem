@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.omts.Exception.InputInvalidException;
 import com.capgemini.omts.entity.ShowBean;
 import com.capgemini.omts.service.ShowServiceImpl;
 
@@ -47,9 +48,9 @@ public class ShowRestController {
 			showserviceimpl.removeShow(showId);
 
 			ResponseEntity<String> responseEntity = new ResponseEntity(true, HttpStatus.OK);
-			System.out.println("response entity=" + responseEntity);
+			
 			return responseEntity; // return "Your Show is deleted succesfully";
-		} catch (Exception e) {
+		} catch (InputInvalidException e) {
 
 			return new ResponseEntity<String>("Invalid Id", HttpStatus.BAD_REQUEST);
 
@@ -66,9 +67,13 @@ public class ShowRestController {
 
 	@GetMapping("/{showId}") 
 	public ResponseEntity<ShowBean> getshows(@PathVariable int showId) {
-
-		ShowBean bean = showserviceimpl.getShows(showId);
-		return new ResponseEntity(bean, new HttpHeaders(), HttpStatus.OK);
+try {
+	ShowBean bean = showserviceimpl.getShows(showId);
+	return new ResponseEntity(bean, new HttpHeaders(), HttpStatus.OK);
+}catch(InputInvalidException e) {
+	return new ResponseEntity("id not found",HttpStatus.BAD_REQUEST);
+}
+		
 
 	}
 
