@@ -26,7 +26,7 @@ public class ShowServiceImpl implements IShowService {
 		if (repo.existsById(showId)) {
 
 			repo.deleteById(showId);
-		}else {
+		} else {
 			throw new InputInvalidException("id not found");
 		}
 

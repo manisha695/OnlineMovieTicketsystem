@@ -2,7 +2,6 @@ package com.capgemini.omts.controller;
 
 import java.util.List;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.omts.Exception.InputInvalidException;
 import com.capgemini.omts.entity.ShowBean;
 import com.capgemini.omts.service.ShowServiceImpl;
-
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -48,7 +46,7 @@ public class ShowRestController {
 			showserviceimpl.removeShow(showId);
 
 			ResponseEntity<String> responseEntity = new ResponseEntity(true, HttpStatus.OK);
-			
+
 			return responseEntity; // return "Your Show is deleted succesfully";
 		} catch (InputInvalidException e) {
 
@@ -65,15 +63,14 @@ public class ShowRestController {
 
 	}
 
-	@GetMapping("/{showId}") 
+	@GetMapping("/{showId}")
 	public ResponseEntity<ShowBean> getshows(@PathVariable int showId) {
-try {
-	ShowBean bean = showserviceimpl.getShows(showId);
-	return new ResponseEntity(bean, new HttpHeaders(), HttpStatus.OK);
-}catch(InputInvalidException e) {
-	return new ResponseEntity("id not found",HttpStatus.BAD_REQUEST);
-}
-		
+		try {
+			ShowBean bean = showserviceimpl.getShows(showId);
+			return new ResponseEntity(bean, new HttpHeaders(), HttpStatus.OK);
+		} catch (InputInvalidException e) {
+			return new ResponseEntity("id not found", HttpStatus.BAD_REQUEST);
+		}
 
 	}
 
