@@ -55,11 +55,11 @@ public void getAllShowsTest() {
 	  ShowBean bean2=new ShowBean();
 		
 		
-	  bean2.setShowId(10);
+	  bean2.setShowId(11);
 	  bean2.setShowTime("6.00"); 
 	  bean2.setShowName("First Show");
-	  bean2.setMovieName("bahuballi");
-	  bean2.setScreenId(1);
+	  bean2.setMovieName("bahuballi2");
+	  bean2.setScreenId(2);
 	  List<ShowBean> s=new ArrayList<>();
 	  s.add(bean1);
 	  s.add(bean2);
